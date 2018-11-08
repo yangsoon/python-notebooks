@@ -1,0 +1,16 @@
+age,work,house,credit,label
+youth,1,1,general,0
+youth,1,1,good,0
+youth,2,1,good,1
+youth,2,2,general,1
+youth,1,1,general,0
+middle,1,1,general,0
+middle,1,1,good,0
+middle,2,2,good,1
+middle,1,2,super,1
+middle,1,2,general,0
+old,1,2,super,1
+old,1,2,good,1
+old,2,1,good,1
+old,2,1,super,1
+old,1,1,general,0
