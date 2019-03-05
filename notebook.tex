@@ -1,0 +1,607 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{XGboost}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{XGboost分享}\label{xgboostux5206ux4eab}
+
+据kaggle在2015年的统计，在29只冠军队中，有17只用的是XGBoost，其中有8只只用了XGBoost。
+
+    \subsubsection{目录}\label{ux76eeux5f55}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  决策树
+\item
+  提升方法(AdaBoost)
+\item
+  什么是XGboost
+\end{enumerate}
+
+    决策树
+
+ 决策树是一种基本的分类和回归方法， 决策树模型呈树形结构，在分类问题中,
+表示基于特征对实例进行分类的过程，他可以认为是 \(if-then\)规则的集合。
+
+    \subsubsection{目录}\label{ux76eeux5f55}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  算法步骤
+\item
+  学习过程
+\item
+  CART回归树
+\end{enumerate}
+
+    \subsubsection{算法步骤}\label{ux7b97ux6cd5ux6b65ux9aa4}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  选择一个最优特征（使得各个子集有一个在当前条件下最好的分类），然后按照该特征划分数据集。
+\item
+  如果这些子集能够基本正确分类，则构建叶节点
+\item
+  否则，对这些子集继续选择新的最优特征，然后继续分割
+\item
+  循环往复，直到所有训练数据子集已经被基本正确分类，或没有合适的特征为止
+\end{enumerate}
+
+    \subsubsection{看图理解}\label{ux770bux56feux7406ux89e3}
+
+    
+
+    \subsubsection{决策树学习过程}\label{ux51b3ux7b56ux6811ux5b66ux4e60ux8fc7ux7a0b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  特征选择
+\item
+  决策树的生成（考虑局部最优）
+\item
+  决策树的剪枝（考虑全局最优,避免过拟合）
+  损失函数\(C_\alpha=C(T)+\alpha|T|\) \(C(T)\)是模型对训练数据的误差
+  \(|T|\)是模型的复杂度
+\end{enumerate}
+
+    \subsubsection{决策树生成算法}\label{ux51b3ux7b56ux6811ux751fux6210ux7b97ux6cd5}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ID3 (信息增益)
+\item
+  C4.5 (信息增益比) 信息增益(熵变)越大 分类能力越强
+\item
+  \textbf{CART} (分类和回归树)
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    \textbf{回归树}：平方误差最小化准则
+    \(min_{j,s}[min_{c1}\sum_{x_i\in R_1(j,s)}(y_i-c_1)^2+min_{c2}\sum_{x_i\in R_2(j,s)}(y_i-c_2)^2]\)
+  \item
+    分类树：基尼指数
+    \(Gini(p) = \sum_{k=1}^{K}p_{k}(1-p_{k}) = 1 - \sum_{k=1}^K p_k^2\)
+  \end{enumerate}
+\end{enumerate}
+
+    \subsubsection{CART
+回归树生成}\label{cart-ux56deux5f52ux6811ux751fux6210}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  设数据集为\(D=\{(x_1,y_1),(x_2,y_2)\dots(x_n,y_n)\}\),设树已有\(M\)个节点，
+  \(R_1,R_2,\dots,R_M\),每个节点对应一个输出值\(c_m\),那么回归树的模型可以表示为
+  \(f(x)=\sum^M_{m=1}c_mI(x\in R_m)\)
+\item
+  \(c_m\)取值为\(\hat{c}_m=ave(y_i|x_i\in R_m)\)
+  (平方误差准则\(\sum_{x_i\in R_m}(y_i-f(x_i))^2\))
+\item
+  对输入空间进行划分 选择切分变量\(x^{j}\)和他的取值切分点\(s\)
+  并定义区域 \(R_{1}(j,s)=\{x|x^{j} \leq s\}\) 和 区域
+  \(R_{2}(j,s)=\{x|x^{j} > s\}\)
+  求解\(min_{j,s}[min_{c1}\sum_{x_i\in R_1(j,s)}(y_i-c_1)^2+min_{c2}\sum_{x_i\in R_2(j,s)}(y_i-c_2)^2]\)
+  遍历变量\(j\),使得上式最小，然后对划分后的区域继续遍历
+\item
+  对划分后的区域再次执行(3) 直到结束
+\end{enumerate}
+
+    提升方法(AdaBoost)
+
+ 就是从弱学习算法出发反复学习，得到一系列弱分类器 ,又称为基本分类器 ，
+然后组合这些弱分类器，构成一个强分类器。 最具代表性的算法AdaBoost算法
+
+    \subsubsection{目录}\label{ux76eeux5f55}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  AdBoost算法
+\item
+  提升树
+\item
+  GBDT
+\end{enumerate}
+
+    \subsubsection{AdBoost算法}\label{adboostux7b97ux6cd5}
+
+\textbf{方法=模型+策略(损失函数)+算法} 二类分类算法(AdBoost) = 加法模型
++ 指数函数 + 前向分步算法
+
+    \subsubsection{加法模型}\label{ux52a0ux6cd5ux6a21ux578b}
+
+最终的结果是如下的加法模型
+\(\begin{equation} f(x)=\sum^M_{m=1}\beta_mb(x;\gamma_m) \label{eq:plus_model} \\ b(x;\gamma_m)是基函数，\gamma_m基函数的参数，\beta_m是基函数的系数。 \end{equation}\)
+
+    \subsubsection{损失函数}\label{ux635fux5931ux51fdux6570}
+
+当给定损失函数后，问题就转换为使损失函数最小
+\(\begin{equation} min_{\beta_m, \gamma_m}\sum^N_{i=1}L(y_i, \sum^M_{m=1}\beta_m b(x_i;\gamma_m)) \label{eq:loss_func} \end{equation}\)
+直接求解比较复杂，使用前向分步算法来解决
+
+    \subsubsection{前向分步算法}\label{ux524dux5411ux5206ux6b65ux7b97ux6cd5}
+
+前向分步算法的思路是：因为学习的是加法模型，若能从前到后，每一步只学习一个基函数及其系数，逐步逼近优化目标函数，那么就可以简化复杂度。
+每步只需要优化如下损失函数
+\(min_{\beta, \gamma}\sum^N_{i=1}L(y_i, \beta b(x_i;\gamma))\)
+
+    
+
+    针对于Boosting方法，就有两个地方需要注意：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  每一轮如何改变训练数据的权值和概率分布
+\item
+  如何将弱分类器组合成一个强分类器
+\end{enumerate}
+
+以AdaBoost算法为例，
+对于第1个问题，AdaBoost的方法是提升被前一轮弱分类器错误分类的样本的权值，降低被正确分类样本的权值；
+对于第2个问题，AdaBoost采取加权多数表决的方法，加大分类误差率小的弱分类器的权值，减少分类误差率大的弱分类器的权值。
+
+    \subsubsection{提升树}\label{ux63d0ux5347ux6811}
+
+提升树是以分类树或回归树为基础分类器的提升方法，提升树模型可以表示为决策树的加法模型,下面以损失为平方误差为例:
+\(L(y,F(x))=\frac{1}{2}(y-F(x))^2\) 损失函数的一阶导数
+\(\frac{\partial L(y,F(x_i))}{\partial F(x_i)} = F(x_i) - y\)
+
+    \subsubsection{回归问题的提升树算法}\label{ux56deux5f52ux95eeux9898ux7684ux63d0ux5347ux6811ux7b97ux6cd5}
+
+输入: 数据集为\(D=\{(x_1,y_1),(x_2,y_2)\dots(x_n,y_n)\}\) 输出: 提升树
+\(f_M(x)\) (1) 初始化\(f_0(x)=0\) (2) 对\(m=1,2,...,M\) (a)
+计算\textbf{残差} \(r_{mi}=y_i-f_{m-1}(x_i)\) (b) 拟合残差
+\(r_{mi}\)学习一个回归树，得到\(T(x; \Theta_m)\) (c)
+更新\(f_m(x_i)=f_{m-1}(x)+T(x)\) (3)
+得到回归问题的提升树\(f_M(x) = \sum_{m=1}^{M}T(x;\Theta_m)\)
+
+    简单点!
+
+    
+
+    \subsubsection{GBDT
+(梯度提升决策树)}\label{gbdt-ux68afux5ea6ux63d0ux5347ux51b3ux7b56ux6811}
+
+GBDT所采用的也是加法模型和前向分步算法，树的类型则是CART树,loss函数不定,
+当损失函数的是平方损失和指数损失函数时，每一步的优化会比较简单，但对一般损失函数来说，往往每一步优化没有那么简单，
+所以 \textbf{Freidman}提出梯度提升算法，以负梯度代替残差来求解基函数。
+\(r_{mi} = -[\frac{\partial L(y,f(x_i))}{\partial f(x_i)}]_{f(x)=f(x)_{m-1}}\)
+
+    XGBoost
+
+\subsubsection{前情回顾}\label{ux524dux60c5ux56deux987e}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  决策树生成算法CART
+\item
+  回归树和分类树
+\item
+  方法=模型+策略(损失函数)+算法
+\item
+  GBDT
+\end{enumerate}
+
+    \subsubsection{XGBoost和GBDT有什么关联}\label{xgboostux548cgbdtux6709ux4ec0ux4e48ux5173ux8054}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  xgboost和GBDT的学习过程都是一样的，都是基于Boosting的思想，先学习前n-1个学习器，然后基于前n-1个学习器学习第n个学习器。(加法模型，前向分步算法)
+\item
+  建树过程都利用了损失函数的导数信息(Gradient),只是大家利用的方式不一样而已。
+\end{enumerate}
+
+    \subsubsection{XGBoost和GBDT的区别}\label{xgboostux548cgbdtux7684ux533aux522b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  xgboost和GBDT的一个区别在于目标函数上。 在xgboost中，损失函数+正则项。
+  GBDT中，只有损失函数。
+\item
+  xgboost中利用二阶导数的信息，而GBDT只利用了一阶导数。
+\item
+  xgboost在建树的时候利用的准则来源于目标函数推导，而GBDT建树利用的是启发式准则。(牛逼之处)
+\end{enumerate}
+
+    \subsubsection{目标函数}\label{ux76eeux6807ux51fdux6570}
+
+\(Obj(\Theta)=L(\Theta)+\Omega(\Theta)\)
+损失函数用于描述模型拟合数据的程度。 正则项用于控制模型的复杂度。
+我们可以利用Boosting的思想来解决这个问题，我们把学习的过程分解成先学第一颗树，然后基于第一棵树学习第二颗树
+\(\hat{y}_i^K=\hat{y}_i^{K-1}+f_K(x_i)\) 所以对第K个目标函数可得
+\(Obj^K=\sum_iL(y_i,\hat{y}_i^K)+\Omega(f_K)+constant\)
+\(Obj^K=\sum_iL\left(y_i,\hat{y}_i^{K-1}+f_K(x_i)\right)+\Omega(f_K)+constant\)
+
+    \subsubsection{二阶泰勒展开}\label{ux4e8cux9636ux6cf0ux52d2ux5c55ux5f00}
+
+\(f(x+\Delta x)=f(x)+f'(x)\Delta x+\frac{1}{2}f''(x){\Delta x}^2\)
+对损失函数进行二阶泰勒展开
+其中我们把\(\hat{y_i}^{K-1}\)看做\(x\)，把\(f_K(x_i)\)看做\(\Delta x\),
+就能转换成下面的式子
+\(\sum_iL\left(y_i,\hat{y_i}^{K-1}+f_K(x_i)\right)=\sum_i\left[L(y_i,\hat{y}_i^{K-1})+L'(y_i,\hat{y}_i^{K-1})f_K(x_i)+\frac{1}{2}L''(y_i,\hat{y}_i^{K-1})f_K^2(x_i)\right]\)
+然后下面再加上正则项\(\Omega(f_t) = \gamma T + \frac 1 2 \lambda \sum_{j = 1}^T w_j^2\)进行化简整理
+
+    \subsubsection{几个简单的替代}\label{ux51e0ux4e2aux7b80ux5355ux7684ux66ffux4ee3}
+
+针对式子
+\(\sum_iL\left(y_i,\hat{y_i}^{K-1}+f_K(x_i)\right)=\sum_i\left[L(y_i,\hat{y}_i^{K-1})+L'(y_i,\hat{y}_i^{K-1})f_K(x_i)+\frac{1}{2}L''(y_i,\hat{y}_i^{K-1})f_K^2(x_i)\right]\)
+我们用\(g_i\)代替\(f^{\prime}(x)\),
+用\(h_i\)代替\(f^{\prime \prime}(x)\),
+因为在第k步时，\(\hat{y}^{k-1}_i\)是已知值，所以\(l(y_i,\hat{y}^{k-1}_i)\)是常数，不影响函数优化，可以省去.
+所以我们的目标函数可以表示为
+\(Obj^{(k)} \approx \sum_{i = 1}^n [g_i f_k(x_i) + \frac 1 2 h_i f_k^2 (x_i)] + \Omega (f_k)\)
+在这里变量是\(f_k(x)\)就是我们要学习的决策树
+
+    \subsubsection{\texorpdfstring{\(f_t(x)\)}{f\_t(x)}}\label{f_tx}
+
+对\(f_t(x)\)进行转换一下
+\(f_t(x)=w_{q(x)} \\ q(x)代表样本x位于哪个叶子结点\\ w_q代表该叶子结点的取值\)
+
+    
+
+    \subsubsection{正则项}\label{ux6b63ux5219ux9879}
+
+用叶子的个数和叶子权重的平滑程度来描述模型的复杂度
+\(\Omega(f_t) = \gamma T + \frac 1 2 \lambda \sum_{j = 1}^T w_j^2\)
+用\(I_j\)来表示第\(j\)个叶子节点的样本集合，就是下图中的每个圆圈中的人。
+
+    
+
+    \subsection{目标函数化简}\label{ux76eeux6807ux51fdux6570ux5316ux7b80}
+
+\begin{align}
+Obj^{(t)} &\approx \sum_{i = 1}^n [g_i f_t(x_i) + \frac 1 2 h_i f_t^2 (x_i)] + \Omega (f_t) \\
+          &= \sum_{i = 1}^n [ g_i w_{q(x_i)} + \frac 1 2 h_i w_{q(x)}^2] + \gamma T + \frac 1 2 \lambda \sum_{j = 1}^T w_j^2 \\
+          &= \sum_{j = 1}^T [(\sum_{i \in I_j } g_i)w_j + \frac 1 2 (\sum_{i \in I_j}h_i + \lambda)w_j^2] + \gamma T
+\end{align}
+
+    我们再进行替换 \(G_j=\sum_{(i \in I_j)}g_i\)
+\(H_j=\sum_{(i \in I_j)}h_i\) 然后最终化简结果为:
+\$\sum\_\{j=1\}\^{}\{T\}\left[G_jw_j+\frac{1}{2}(H_j+\lambda )w_{j}^2\right]+\gamma T
+\(<br> 假设树的结构已知，即\)q(x)\$已知
+，那么对目标函数求一阶导数，然后代入极值点
+\(w^*=-\frac{G_j}{H_j+\lambda}\)
+\(Obj=-\frac{1}{2}\sum_{j=1}^T\frac{G_j^2}{H_j+\lambda}+\gamma T\)
+
+    
+
+    \subsubsection{树的分裂}\label{ux6811ux7684ux5206ux88c2}
+
+XGboost 分裂准则是直接与损失函数挂钩的准则
+\$Gain=\frac{1}{2}\left[\frac{G_L^2}{H_L^2+\lambda}+\frac{G_R^2}{H_R^2+\lambda}-\frac{(GL+G_R)^2}{(H_L+H_R)^2+\lambda}\right]-\gamma \$
+\(\begin{align}  Obj_{split} &= - \frac 1 2 [\frac {G_L^2}{H_L + \lambda} + \frac {G_R^2}{H_R + \lambda}] + \gamma T_{split} \\  Obj_{noSplit} &= - \frac 1 2 \frac {(G_L + G_R)^2}{H_L + H_R + \lambda} + \gamma T_{noSplit} \\  Gain &= Obj_{noSplit} - Obj_{split} \\  &= \frac 1 2 [\frac {G_L^2}{H_L + \lambda} + \frac {G_R^2}{H_R + \lambda} - \frac {(G_L + G_R)^2}{H_L + H_R + \lambda}] - \gamma(T_{split} - T_{nosplit}) \end{align}\)
+
+    其实我们已经把xgboost的基本原理阐述了一遍。我们总结一下，就是做了以下几件事情。
+1. 在损失函数的基础上加入了正则项。 2. 对目标函数进行二阶泰勒展开。 3.
+利用推导得到的表达式作为分裂准确，来构建每一颗树。
+
+    \href{https://blog.csdn.net/qq_22238533/article/details/79185969}{GBDT原理与Sklearn源码分析-回归篇}
+\href{https://blog.csdn.net/qq_22238533/article/details/79477547}{xgboost原理分析以及实践}
+\href{https://zhuanlan.zhihu.com/p/29765582}{机器学习-一文理解GBDT的原理}
+\textbf{图片来自陈天齐的论文ppt}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
